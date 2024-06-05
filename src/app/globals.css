@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary: #08152e;
+  --secondary: #22345f;
+  --detail: #bda6c6;
+  --detail-two: #f5f5f7;
+}
+html {
+  font-family: 'Sofia Sans', sans-serif;
+}
