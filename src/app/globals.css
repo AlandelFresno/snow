@@ -10,6 +10,9 @@
 }
 html {
   font-family: 'Sofia Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 400 ;
   color: white;
   scroll-behavior: smooth;
 }
