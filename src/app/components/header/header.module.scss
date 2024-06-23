@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 4rem;
+  height: 6.875rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,16 +17,72 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 
+  .isologo {
+    height: 36px;
+    cursor: pointer;
+  }
+
   .links {
     display: flex;
     gap: 2rem;
     margin-right: 2rem;
-    p {
+    a {
+      font-size: 28px;
       color: var(--secondary);
       cursor: pointer;
     }
-    p:hover {
+    a:hover {
       color: var(--detail);
+    }
+  }
+
+  .burgerMenu {
+    display: none;
+    .burger {
+      cursor: pointer;
+    }
+  }
+}
+
+.showLinks {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-right: 2rem;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  top: 6.875rem;
+  left: 0;
+  padding-bottom: 2rem;
+  a {
+    // padding-left: 2rem;
+    font-size: 28px;
+    color: var(--secondary);
+    cursor: pointer;
+  }
+  a:hover {
+    color: var(--detail);
+  }
+}
+.show {
+  display: flex;
+}
+
+@media (max-width: 425px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 2rem;
+    .links {
+      display: none;
+      position: absolute;
+      bottom: 0;
+    }
+    .burgerMenu {
+      display: block;
     }
   }
 }
