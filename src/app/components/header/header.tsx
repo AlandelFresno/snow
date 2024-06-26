@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from './header.module.scss';
 
 const header = () => {
-  const [showLinks, setShowLinks] = useState(true);
+  const [showLinks, setShowLinks] = useState(false);
 
   const handleClick = () => {
     const element = document.getElementById('main');
@@ -46,6 +46,11 @@ const header = () => {
           `${styles.showLinks}` + ' ' + `${showLinks ? styles.show : ''}`
         }
       >
+        <img
+          onClick={burgerClick}
+          src="/assets/images/close.svg"
+          className={styles.close}
+        />
         <a href="#services">Servicios</a>
         <a href="#about">Sobre nosotros</a>
         <a href="#contact">Contacto</a>
