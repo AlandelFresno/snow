@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './services.module.scss';
 
-const services = () => {
+const Services = () => {
   return (
     <div className={styles.container} id="services">
       <h3>Servicios</h3>
@@ -42,4 +42,4 @@ const services = () => {
   );
 };
 
-export default services;
+export default Services;
