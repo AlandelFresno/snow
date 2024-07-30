@@ -1,0 +1,18 @@
+import React from 'react';
+import styles from './about.module.scss';
+
+const about = () => {
+  return (
+    <div className={styles.container} id="about">
+      <h3 className={styles.title}>Sobre nosotros</h3>
+      <p className={styles.body}>
+        Somos dos socios con más de 30 años de experiencia en la industria,
+        ingenieros recibidos y especializados en nuestros servicios. Nuestros
+        conocimientos te aseguran un trabajo excelente. No dudes en
+        contactarnos!
+      </p>
+    </div>
+  );
+};
+
+export default about;
