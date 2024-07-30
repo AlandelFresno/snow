@@ -13,7 +13,7 @@
     font-weight: 900;
   }
   .formContainer {
-    width: 50%;
+    width: 40%;
     justify-self: center;
     .inputContainer {
       display: flex;
@@ -53,10 +53,20 @@
   }
 }
 
+@media (max-width: 1440px) {
+  .container {
+    .formContainer {
+      width: 50%;
+    }
+  }
+}
 @media (max-width: 420px) {
   .container {
     .title {
       margin-left: 4rem;
+    }
+    .formContainer {
+      width: 50%;
     }
   }
 }

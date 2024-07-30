@@ -1,8 +1,7 @@
-import About from './components/about/about';
-import Contact from './components/contact/contact';
-import Header from './components/header/header';
-import Services from './components/services/services';
-
+import About from './components/about/About';
+import Contact from './components/contact/Contact';
+import Header from './components/header/Header';
+import Services from './components/services/Services';
 import SEO from './seo';
 
 export default function Home() {
