@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
-import { mailTemplate } from '../lib/mailTemplate';
-import Handlebars from 'handlebars';
+import { compileMailTemplate } from '../helpers/compileMailTemplate';
+import Error from 'next/error';
+
 
 export async function POST(req: Request) {
   const { name, mail, subject, body } = await req.json();
@@ -47,20 +48,9 @@ async function sendMail({
       html: await compileMailTemplate(mail, body, name),
     });
     return { sendResult, status: 200 };
-  } catch (error) {
+  } catch (error: any) {
     return { error };
   }
 }
 
-export async function compileMailTemplate(
-  mail: string,
-  body: string,
-  name: string
-) {
-  const template = Handlebars.compile(mailTemplate);
-  return template({
-    mail,
-    body,
-    name,
-  });
-}
+

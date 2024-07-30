@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styles from './header.module.scss';
 
-const header = () => {
+const Header = () => {
   const [showLinks, setShowLinks] = useState(false);
 
   const handleClick = () => {
@@ -59,4 +59,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;

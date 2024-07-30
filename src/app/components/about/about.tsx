@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './about.module.scss';
 
-const about = () => {
+const About = () => {
   return (
     <div className={styles.container} id="about">
       <h3 className={styles.title}>Sobre nosotros</h3>
@@ -15,4 +15,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;
