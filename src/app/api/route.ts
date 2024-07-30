@@ -4,13 +4,18 @@ import Handlebars from 'handlebars';
 
 export async function POST(req: Request) {
   const { name, mail, subject, body } = await req.json();
-  await sendMail({
+  const response = await sendMail({
     name,
     mail,
     subject,
     body,
   });
-  return new Response('hello');
+  if (response.sendResult) {
+    return new Response('Mail Sent');
+  } else {
+    console.log(response.error);
+    return response.error;
+  }
 }
 
 async function sendMail({
@@ -41,9 +46,9 @@ async function sendMail({
       subject,
       html: await compileMailTemplate(mail, body, name),
     });
-    console.log(sendResult);
+    return { sendResult, status: 200 };
   } catch (error) {
-    console.log(error);
+    return { error };
   }
 }
 

@@ -16,10 +16,6 @@ const Contact = () => {
   const [errors, setErrors] = useState<any>({});
   const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(() => {
-    validateForm();
-  }, [formData]);
-
   // Validate form
   const validateForm = () => {
     let errors: any = {};
@@ -45,7 +41,7 @@ const Contact = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    validateForm(); 
+    validateForm();
 
     if (isFormValid) {
       try {
@@ -75,8 +71,9 @@ const Contact = () => {
 
   return (
     <div className={styles.container} id="contact">
-      <form onSubmit={handleSubmit}>
-        <div>
+      <h3 className={styles.title}>Contacto</h3>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <div className={styles.inputContainer}>
           <label>Nombre</label>
           <input
             autoComplete="off"
@@ -88,10 +85,11 @@ const Contact = () => {
           />
           {errors.name && <small>{errors.name}</small>}
         </div>
-        <div>
-          <label>Email</label>
+        <div className={styles.inputContainer}>
+          <label>Correo</label>
           <input
             autoComplete="off"
+            autoSave="false"
             type="text"
             name="email"
             required
@@ -100,7 +98,7 @@ const Contact = () => {
           />
           {errors.email && <small>{errors.email}</small>}
         </div>
-        <div>
+        <div className={styles.inputContainer}>
           <label>Descripción</label>
           <textarea
             name="description"
@@ -110,7 +108,9 @@ const Contact = () => {
           />
           {errors.description && <small>{errors.description}</small>}
         </div>
-        <button type="submit">Enviar</button>
+        <button type="submit" className={styles.button}>
+          Enviar
+        </button>
       </form>
     </div>
   );
