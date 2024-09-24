@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+
 import styles from './services.module.scss';
 
 const Services = () => {
@@ -35,6 +37,7 @@ const Services = () => {
             />
             <p>Mantenimiento de centrales telefónicas públicas TDM e IP.</p>
           </div>
+          <Link className={styles.linkItem} href="/servicios">Ver más...</Link>
         </div>
         <p id="about"></p>
       </div>
