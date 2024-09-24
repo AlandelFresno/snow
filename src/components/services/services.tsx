@@ -37,9 +37,10 @@ const Services = () => {
             />
             <p>Mantenimiento de centrales telefónicas públicas TDM e IP.</p>
           </div>
+          <p id="about"></p>
           <Link className={styles.linkItem} href="/servicios">Ver más...</Link>
         </div>
-        <p id="about"></p>
+        
       </div>
       <img className={styles.chip} src="/assets/images/chip.jpg" />
     </div>
