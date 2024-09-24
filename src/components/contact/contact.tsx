@@ -67,7 +67,7 @@ const Contact = () => {
   };
 
   return (
-    <div className={styles.container} id="contact">
+    <div className={styles.container}>
       <h3 className={styles.title}>Contacto</h3>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <div className={styles.inputContainer}>

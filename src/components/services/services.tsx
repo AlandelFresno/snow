@@ -3,7 +3,7 @@ import styles from './services.module.scss';
 
 const Services = () => {
   return (
-    <div className={styles.container} id="services">
+    <div className={styles.container}>
       <h3>Servicios</h3>
       <div className={styles.service_container}>
         <div className={styles.list_container}>
@@ -36,6 +36,7 @@ const Services = () => {
             <p>Mantenimiento de centrales telefónicas públicas TDM e IP.</p>
           </div>
         </div>
+        <p id="about"></p>
       </div>
       <img className={styles.chip} src="/assets/images/chip.jpg" />
     </div>

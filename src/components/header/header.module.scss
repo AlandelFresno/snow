@@ -26,12 +26,14 @@
     display: flex;
     gap: 2rem;
     margin-right: 2rem;
-    a {
+    a,
+    Link {
       font-size: 28px;
       color: var(--secondary);
       cursor: pointer;
     }
-    a:hover {
+    a:hover,
+    Link:hover {
       color: var(--detail);
     }
   }
