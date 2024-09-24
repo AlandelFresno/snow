@@ -1,8 +1,9 @@
 'use client';
 import React, { useState } from 'react';
-import styles from './header.module.scss';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import styles from './header.module.scss';
 
 const Header = () => {
   const path = usePathname();
@@ -37,8 +38,8 @@ const Header = () => {
       </div>
       <div className={styles.links}>
         <Link href="/servicios">Servicios</Link>
-        <a href={path === '/' ? '#about' : ''}>Sobre nosotros</a>
-        <a href={path === '/' ? '#contact' : ''}>Contacto</a>
+        <Link href="/#about">Sobre nosotros</Link>
+        <Link href="/#contact">Contacto</Link>
       </div>
       <div
         className={
