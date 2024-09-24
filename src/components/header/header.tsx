@@ -1,14 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './header.module.scss';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
+  const path = usePathname();
   const [showLinks, setShowLinks] = useState(false);
-
-  const handleClick = () => {
-    const element = document.getElementById('main');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const burgerClick = () => {
     setShowLinks((v) => !v);
@@ -16,11 +14,12 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <img
-        src="/assets/images/snow/snow_isologo_sin_rubro_version_positivo_svg.svg"
-        className={styles.isologo}
-        onClick={handleClick}
-      />
+      <Link href="/">
+        <img
+          src="/assets/images/snow/snow_isologo_sin_rubro_version_positivo_svg.svg"
+          className={styles.isologo}
+        />
+      </Link>
       <div className={styles.burgerMenu}>
         {showLinks ? (
           <img
@@ -37,9 +36,9 @@ const Header = () => {
         )}
       </div>
       <div className={styles.links}>
-        <a href="#services">Servicios</a>
-        <a href="#about">Sobre nosotros</a>
-        <a href="#contact">Contacto</a>
+        <Link href="/servicios">Servicios</Link>
+        <a href={path === '/' ? '#about' : ''}>Sobre nosotros</a>
+        <a href={path === '/' ? '#contact' : ''}>Contacto</a>
       </div>
       <div
         className={

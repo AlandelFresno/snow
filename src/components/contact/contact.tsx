@@ -2,7 +2,7 @@
 'use client';
 
 // Imports
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import axios from 'axios';
 // Local Imports
 import styles from './contact.module.scss';
@@ -45,10 +45,7 @@ const Contact = () => {
 
     if (isFormValid) {
       try {
-        const response = await axios.post(
-          `http://localhost:3000/api`,
-          formData
-        );
+        const response = await axios.post(`${process.env}/api`, formData);
         console.log(response);
         console.log('Form submitted successfully!');
       } catch (error) {
@@ -70,7 +67,7 @@ const Contact = () => {
   };
 
   return (
-    <div className={styles.container} id="contact">
+    <div className={styles.container}>
       <h3 className={styles.title}>Contacto</h3>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <div className={styles.inputContainer}>
