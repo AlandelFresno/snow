@@ -7,6 +7,8 @@ import axios from 'axios';
 // Local Imports
 import styles from './contact.module.scss';
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -14,7 +16,8 @@ const Contact = () => {
     description: '',
   });
   const [errors, setErrors] = useState<any>({});
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Validate form
   const validateForm = () => {
@@ -35,24 +38,54 @@ const Contact = () => {
     }
 
     setErrors(errors);
-    setIsFormValid(Object.keys(errors).length === 0);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    validateForm();
+    // Limpiar mensajes previos
+    setErrorMessage('');
+    setErrors({});
 
-    if (isFormValid) {
-      try {
-        const response = await axios.post(`${process.env}/api`, formData);
-        console.log(response);
-        console.log('Form submitted successfully!');
-      } catch (error) {
-        console.error('Error submitting form:', error);
+    const isValid = validateForm();
+
+    if (!isValid) {
+      return;
+    }
+
+    setFormStatus('loading');
+
+    try {
+      const response = await axios.post('/api/contact', formData);
+
+      if (response.status === 200) {
+        setFormStatus('success');
+        // Limpiar el formulario
+        setFormData({
+          name: '',
+          email: '',
+          description: '',
+        });
+
+        // Reset status después de 5 segundos
+        setTimeout(() => {
+          setFormStatus('idle');
+        }, 5000);
       }
-    } else {
-      console.log('Form has errors. Please correct them.');
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      setFormStatus('error');
+      setErrorMessage(
+        error.response?.data?.error ||
+        'Error al enviar el mensaje. Por favor intente nuevamente.'
+      );
+
+      // Reset status después de 5 segundos
+      setTimeout(() => {
+        setFormStatus('idle');
+        setErrorMessage('');
+      }, 5000);
     }
   };
 
@@ -64,12 +97,34 @@ const Contact = () => {
       ...prevFormData,
       [name]: value,
     }));
+
+    // Limpiar error del campo cuando el usuario empiece a escribir
+    if (errors[name]) {
+      setErrors((prevErrors: any) => ({
+        ...prevErrors,
+        [name]: '',
+      }));
+    }
   };
 
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Contacto</h3>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
+        {/* Mensaje de éxito */}
+        {formStatus === 'success' && (
+          <div className={styles.successMessage}>
+            Mensaje enviado correctamente! Te responderemos pronto.
+          </div>
+        )}
+
+        {/* Mensaje de error general */}
+        {formStatus === 'error' && errorMessage && (
+          <div className={styles.errorMessage}>
+            {errorMessage}
+          </div>
+        )}
+
         <div className={styles.inputContainer}>
           <label>Nombre</label>
           <input
@@ -79,6 +134,7 @@ const Contact = () => {
             required
             value={formData.name}
             onChange={handleChange}
+            disabled={formStatus === 'loading'}
           />
           {errors.name && <small>{errors.name}</small>}
         </div>
@@ -92,6 +148,7 @@ const Contact = () => {
             required
             value={formData.email}
             onChange={handleChange}
+            disabled={formStatus === 'loading'}
           />
           {errors.email && <small>{errors.email}</small>}
         </div>
@@ -102,11 +159,16 @@ const Contact = () => {
             required
             value={formData.description}
             onChange={handleChange}
+            disabled={formStatus === 'loading'}
           />
           {errors.description && <small>{errors.description}</small>}
         </div>
-        <button type="submit" className={styles.button}>
-          Enviar
+        <button
+          type="submit"
+          className={styles.button}
+          disabled={formStatus === 'loading'}
+        >
+          {formStatus === 'loading' ? 'Enviando...' : 'Enviar'}
         </button>
       </form>
     </div>
