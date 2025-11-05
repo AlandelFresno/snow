@@ -1,43 +1,175 @@
 .container {
-  padding-top: 4rem;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  .title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary) 0%, #0a1a35 100%);
+  min-height: 100vh;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(189, 166, 198, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
   }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    font-weight: 900;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--detail), transparent);
+      border-radius: 2px;
+    }
+  }
+
   .airListContainer {
-    background-color: var(--secondary);
-    width: 70%;
+    background: linear-gradient(135deg, var(--secondary) 0%, #1a2947 100%);
+    width: 80%;
     display: grid;
-    padding: 1rem;
-    padding-bottom: 3rem;
+    padding: 3rem;
+    padding-bottom: 4rem;
     margin-bottom: 2rem;
-    border-radius: 0.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 70px rgba(189, 166, 198, 0.2);
+    }
+
     h3 {
       justify-self: center;
-      font-size: 1.4rem;
-      padding-bottom: 2rem;
+      font-size: 1.8rem;
+      padding-bottom: 3rem;
+      text-align: center;
+      color: var(--detail);
+      font-weight: 800;
     }
+
     h5 {
       color: var(--detail);
-      font-size: 1.25rem;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 80%;
+        background: var(--detail);
+        border-radius: 2px;
+      }
     }
+
     .airList {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 1rem;
+      gap: 2rem;
       justify-items: center;
 
       .airListItem {
-        width: 60%;
+        width: 100%;
         justify-items: start;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: var(--detail);
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(189, 166, 198, 0.2);
+        }
+
+        p {
+          padding: 0.5rem 0;
+          padding-left: 1.5rem;
+          position: relative;
+          line-height: 1.6;
+          transition: transform 0.2s ease;
+
+          &::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--detail);
+            font-size: 1.2rem;
+          }
+
+          &:hover {
+            transform: translateX(5px);
+          }
+        }
       }
+
       .airListItemCombo {
-        width: 60%;
+        width: 100%;
         display: grid;
-        gap: 1rem;
+        gap: 1.5rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: var(--detail);
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(189, 166, 198, 0.2);
+        }
+
+        div {
+          p {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+            transition: transform 0.2s ease;
+
+            &::before {
+              content: '▸';
+              position: absolute;
+              left: 0;
+              color: var(--detail);
+              font-size: 1.2rem;
+            }
+
+            &:hover {
+              transform: translateX(5px);
+            }
+          }
+        }
       }
     }
   }
@@ -45,29 +177,125 @@
 
 @media (max-width: 1024px) {
   .container {
+    .title {
+      font-size: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
     .airListContainer {
+      width: 85%;
+      padding: 2.5rem;
+
+      h3 {
+        font-size: 1.6rem;
+        padding-bottom: 2.5rem;
+      }
+
+      h5 {
+        font-size: 1.3rem;
+      }
+
       .airList {
         grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+
+        .airListItem,
+        .airListItemCombo {
+          padding: 1.5rem;
+        }
       }
     }
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .container {
+    padding-top: 4rem;
+
+    &::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
     .airListContainer {
+      width: 90%;
+      padding: 2rem;
+
+      h3 {
+        font-size: 1.4rem;
+        padding-bottom: 2rem;
+      }
+
+      h5 {
+        font-size: 1.2rem;
+      }
+
+      .airList {
+        gap: 1.2rem;
+
+        .airListItem,
+        .airListItemCombo {
+          padding: 1.2rem;
+
+          p {
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-top: 3rem;
+
+    .title {
+      font-size: 1.7rem;
+    }
+
+    .airListContainer {
+      width: 95%;
+      padding: 1.5rem;
+
       h3 {
         text-align: center;
+        font-size: 1.2rem;
+        padding-bottom: 1.5rem;
       }
+
+      h5 {
+        font-size: 1.1rem;
+      }
+
       .airList {
         grid-template-columns: 1fr;
         justify-items: center;
+        gap: 1rem;
+
         .airListItem {
           display: grid;
-          width: 80%;
+          width: 100%;
+          padding: 1rem;
+
+          p {
+            font-size: 0.9rem;
+          }
         }
+
         .airListItemCombo {
-          width: 80%;
+          width: 100%;
+          padding: 1rem;
+          gap: 1rem;
+
+          div p {
+            font-size: 0.9rem;
+          }
         }
       }
     }

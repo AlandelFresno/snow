@@ -1,9 +1,24 @@
 .container {
   width: 100%;
   height: 100%;
-  padding-bottom: 4rem;
-  background-color: var(--secondary);
+  padding-bottom: 6rem;
+  background: linear-gradient(135deg, var(--secondary) 0%, #1a2947 100%);
   display: grid;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(189, 166, 198, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
   .title {
     font-size: 40px;
     align-self: flex-start;
@@ -11,45 +26,131 @@
     margin-bottom: 2rem;
     margin-top: 4rem;
     font-weight: 900;
+    position: relative;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--detail), transparent);
+      border-radius: 2px;
+    }
   }
+
   .formContainer {
     width: 40%;
     justify-self: center;
+    position: relative;
+    z-index: 1;
+
     .inputContainer {
       display: flex;
       flex-direction: column;
-      padding-bottom: 1rem;
-      input {
-        color: black;
-        border-radius: 10px;
-        height: 2rem;
-        padding: 1rem;
+      padding-bottom: 1.5rem;
+      position: relative;
+
+      label {
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--detail);
+        transition: color 0.3s ease;
       }
-      input:focus,
-      textarea:focus {
-        outline: none;
-      }
+
+      input,
       textarea {
-        color: black;
-        border-radius: 10px;
-        padding: 0.5rem;
+        color: white;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        font-family: 'Sofia Sans', sans-serif;
+
+        &:focus {
+          outline: none;
+          border-color: var(--detail);
+          background: rgba(255, 255, 255, 0.12);
+          box-shadow: 0 0 20px rgba(189, 166, 198, 0.2);
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.4);
+        }
+      }
+
+      input {
+        height: 3rem;
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
       }
     }
+
     small {
       padding-top: 0.5rem;
-      color: red;
+      color: #ff6b6b;
+      font-weight: 500;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      &::before {
+        content: '⚠';
+        font-size: 16px;
+      }
     }
+
     .button {
-      background-color: white;
+      background: linear-gradient(135deg, var(--detail) 0%, #9d7faa 100%);
       width: 100%;
-      margin-top: 1rem;
-      height: 2.5rem;
-      border-radius: 10px;
-      color: black;
+      margin-top: 1.5rem;
+      height: 3rem;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(189, 166, 198, 0.4);
+
+        &::before {
+          width: 400px;
+          height: 400px;
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
     }
-    // .button:hover {
-    //   background-color: var(--detail);
-    // }
   }
 }
 
@@ -60,13 +161,70 @@
     }
   }
 }
-@media (max-width: 420px) {
+
+@media (max-width: 1024px) {
   .container {
     .title {
       margin-left: 4rem;
+      font-size: 36px;
     }
     .formContainer {
-      width: 50%;
+      width: 60%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-bottom: 4rem;
+
+    &::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    .title {
+      margin-left: 0;
+      align-self: center;
+      font-size: 32px;
+      text-align: center;
+    }
+
+    .formContainer {
+      width: 80%;
+
+      .inputContainer {
+        label {
+          font-size: 16px;
+        }
+
+        input,
+        textarea {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    .title {
+      font-size: 28px;
+      margin-top: 3rem;
+    }
+
+    .formContainer {
+      width: 90%;
+
+      .inputContainer {
+        padding-bottom: 1.2rem;
+      }
+
+      .button {
+        height: 2.8rem;
+        font-size: 16px;
+      }
     }
   }
 }
