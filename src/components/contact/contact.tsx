@@ -3,7 +3,7 @@
 
 // Imports
 import React, { FormEvent, useState } from 'react';
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
 // Local Imports
 import styles from './contact.module.scss';
 
@@ -57,7 +57,30 @@ const Contact = () => {
     setFormStatus('loading');
 
     try {
-      const response = await axios.post('/api/contact', formData);
+      // Obtener las variables de entorno
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+      // Verificar que existan las credenciales
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error(
+          'Configuración de email incompleta. Por favor contacte al administrador.'
+        );
+      }
+
+      // Enviar el email usando EmailJS
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.description,
+          to_name: 'Snow',
+        },
+        publicKey
+      );
 
       if (response.status === 200) {
         setFormStatus('success');
@@ -77,8 +100,7 @@ const Contact = () => {
       console.error('Error submitting form:', error);
       setFormStatus('error');
       setErrorMessage(
-        error.response?.data?.error ||
-        'Error al enviar el mensaje. Por favor intente nuevamente.'
+        error.message || 'Error al enviar el mensaje. Por favor intente nuevamente.'
       );
 
       // Reset status después de 5 segundos
