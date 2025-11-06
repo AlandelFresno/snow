@@ -102,13 +102,13 @@
         background: rgba(255, 255, 255, 0.05);
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        will-change: transform;
 
         &:hover {
           background: rgba(255, 255, 255, 0.08);
           border-color: var(--detail);
           transform: translateY(-5px);
-          box-shadow: 0 10px 30px rgba(189, 166, 198, 0.2);
         }
 
         p {
@@ -116,7 +116,8 @@
           padding-left: 1.5rem;
           position: relative;
           line-height: 1.6;
-          transition: transform 0.2s ease;
+          transition: transform 0.15s ease;
+          will-change: transform;
 
           &::before {
             content: '▸';
@@ -140,13 +141,13 @@
         background: rgba(255, 255, 255, 0.05);
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        will-change: transform;
 
         &:hover {
           background: rgba(255, 255, 255, 0.08);
           border-color: var(--detail);
           transform: translateY(-5px);
-          box-shadow: 0 10px 30px rgba(189, 166, 198, 0.2);
         }
 
         div {
@@ -155,7 +156,8 @@
             padding-left: 1.5rem;
             position: relative;
             line-height: 1.6;
-            transition: transform 0.2s ease;
+            transition: transform 0.15s ease;
+            will-change: transform;
 
             &::before {
               content: '▸';

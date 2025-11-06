@@ -64,23 +64,22 @@
         align-items: start;
         padding: 1.5rem;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        transition: all 0.4s ease;
+        background: rgba(255, 255, 255, 0.06);
+        transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
         border: 1px solid rgba(255, 255, 255, 0.1);
+        will-change: transform;
 
         &:hover {
           transform: translateX(10px);
           background: rgba(255, 255, 255, 0.1);
           border-color: var(--detail);
-          box-shadow: 0 8px 32px rgba(189, 166, 198, 0.2);
         }
 
         img {
           margin-top: 0.4rem;
           margin-right: 1rem;
-          filter: drop-shadow(0 0 8px rgba(189, 166, 198, 0.4));
-          transition: transform 0.3s ease;
+          transition: transform 0.4s ease;
+          will-change: transform;
         }
 
         &:hover img {

@@ -7,21 +7,19 @@
   padding: 0 6rem;
   position: sticky;
   top: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.98);
   color: black;
   z-index: 2;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   .isologo {
     height: 36px;
     cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
+    transition: transform 0.2s ease;
+    will-change: transform;
 
     &:hover {
       transform: scale(1.05);
-      filter: brightness(1.1);
     }
   }
 
@@ -35,7 +33,7 @@
       color: var(--secondary);
       cursor: pointer;
       position: relative;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
       text-decoration: none;
 
       &::after {
@@ -45,9 +43,10 @@
         height: 2px;
         bottom: -5px;
         left: 50%;
-        background: linear-gradient(90deg, var(--detail), var(--secondary));
-        transition: all 0.3s ease;
+        background: var(--detail);
+        transition: width 0.2s ease;
         transform: translateX(-50%);
+        will-change: width;
       }
 
       &:hover {
@@ -64,7 +63,8 @@
     display: none;
     .burger {
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.2s ease;
+      will-change: transform;
 
       &:hover {
         transform: scale(1.1);
@@ -73,7 +73,8 @@
   }
   .close {
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
+    will-change: transform;
 
     &:hover {
       transform: rotate(90deg) scale(1.1);
@@ -88,23 +89,23 @@
   gap: 2rem;
   margin-right: 2rem;
   position: absolute;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.98);
   width: 100%;
   top: 6.875rem;
   left: 0;
   padding-bottom: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  animation: slideDown 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.25s ease;
 
   a {
     font-size: 28px;
     color: var(--secondary);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 8px;
+    will-change: transform;
 
     &:hover {
       color: var(--detail);
