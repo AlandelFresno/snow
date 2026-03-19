@@ -132,67 +132,73 @@ const Contact = () => {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Contacto</h3>
-      <form onSubmit={handleSubmit} className={styles.formContainer}>
-        {/* Mensaje de éxito */}
-        {formStatus === 'success' && (
-          <div className={styles.successMessage}>
-            Mensaje enviado correctamente! Te responderemos pronto.
-          </div>
-        )}
+      <p className={styles.subtitle}>
+        Completá el formulario y te respondemos a la brevedad.
+      </p>
 
-        {/* Mensaje de error general */}
-        {formStatus === 'error' && errorMessage && (
-          <div className={styles.errorMessage}>
-            {errorMessage}
-          </div>
-        )}
+      <div className={styles.formWrapper}>
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
+          {/* Mensaje de éxito */}
+          {formStatus === 'success' && (
+            <div className={styles.successMessage}>
+              Mensaje enviado correctamente! Te responderemos pronto.
+            </div>
+          )}
 
-        <div className={styles.inputContainer}>
-          <label>Nombre</label>
-          <input
-            autoComplete="off"
-            type="text"
-            name="name"
-            required
-            value={formData.name}
-            onChange={handleChange}
+          {/* Mensaje de error general */}
+          {formStatus === 'error' && errorMessage && (
+            <div className={styles.errorMessage}>
+              {errorMessage}
+            </div>
+          )}
+
+          <div className={styles.inputContainer}>
+            <label>Nombre</label>
+            <input
+              autoComplete="off"
+              type="text"
+              name="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              disabled={formStatus === 'loading'}
+            />
+            {errors.name && <small>{errors.name}</small>}
+          </div>
+          <div className={styles.inputContainer}>
+            <label>Correo</label>
+            <input
+              autoComplete="off"
+              autoSave="false"
+              type="text"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              disabled={formStatus === 'loading'}
+            />
+            {errors.email && <small>{errors.email}</small>}
+          </div>
+          <div className={styles.inputContainer}>
+            <label>Descripción</label>
+            <textarea
+              name="description"
+              required
+              value={formData.description}
+              onChange={handleChange}
+              disabled={formStatus === 'loading'}
+            />
+            {errors.description && <small>{errors.description}</small>}
+          </div>
+          <button
+            type="submit"
+            className={styles.button}
             disabled={formStatus === 'loading'}
-          />
-          {errors.name && <small>{errors.name}</small>}
-        </div>
-        <div className={styles.inputContainer}>
-          <label>Correo</label>
-          <input
-            autoComplete="off"
-            autoSave="false"
-            type="text"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-            disabled={formStatus === 'loading'}
-          />
-          {errors.email && <small>{errors.email}</small>}
-        </div>
-        <div className={styles.inputContainer}>
-          <label>Descripción</label>
-          <textarea
-            name="description"
-            required
-            value={formData.description}
-            onChange={handleChange}
-            disabled={formStatus === 'loading'}
-          />
-          {errors.description && <small>{errors.description}</small>}
-        </div>
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={formStatus === 'loading'}
-        >
-          {formStatus === 'loading' ? 'Enviando...' : 'Enviar'}
-        </button>
-      </form>
+          >
+            {formStatus === 'loading' ? 'Enviando...' : 'Enviar'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

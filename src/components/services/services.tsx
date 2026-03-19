@@ -7,7 +7,10 @@ import styles from './services.module.scss';
 const Services = () => {
   return (
     <div className={styles.container}>
-      <h3>Servicios</h3>
+      <div className={styles.headingBlock}>
+        <h3>Servicios</h3>
+        <p className={styles.tagline}>Soluciones técnicas con respaldo de experiencia</p>
+      </div>
       <div className={styles.service_container}>
         <div className={styles.list_container}>
           <div className={styles.item}>
@@ -41,10 +44,9 @@ const Services = () => {
             />
             <p>Mantenimiento de centrales telefónicas públicas TDM e IP.</p>
           </div>
-          <p id="about"></p>
-          <Link className={styles.linkItem} href="/servicios">Ver más...</Link>
+          <span id="about" className={styles.anchor}></span>
+          <Link className={styles.linkItem} href="/servicios">Ver servicios completos →</Link>
         </div>
-
       </div>
       <Image
         className={styles.chip}
