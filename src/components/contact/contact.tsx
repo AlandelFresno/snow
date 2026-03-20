@@ -78,6 +78,7 @@ const Contact = () => {
           from_email: formData.email,
           message: formData.description,
           to_name: 'Snow',
+          time: new Date().toLocaleString('es-AR'),
         },
         publicKey
       );
