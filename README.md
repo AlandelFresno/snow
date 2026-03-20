@@ -1,0 +1,330 @@
+# Snow - Sitio Web de Servicios Técnicos
+
+Sitio web moderno y profesional para Snow, empresa especializada en servicios técnicos de mantenimiento, reparación e instalación.
+
+## Características
+
+- Diseño moderno con efectos glassmorphism
+- Animaciones y transiciones suaves
+- Formulario de contacto funcional con envío de emails (sin backend, solo frontend)
+- Totalmente responsive (móvil, tablet, desktop)
+- Paleta de colores profesional
+- Next.js 14 con App Router
+
+## Tecnologías
+
+- **Framework:** Next.js 14
+- **Lenguaje:** TypeScript
+- **Estilos:** SCSS Modules
+- **Email:** EmailJS (solución frontend)
+- **Hosting:** Vercel compatible
+
+## Instalación
+
+1. Clona el repositorio:
+```bash
+git clone <url-del-repositorio>
+cd snow
+```
+
+2. Instala las dependencias:
+```bash
+npm install
+```
+
+3. Configura las variables de entorno (ver sección de configuración abajo)
+
+4. Ejecuta el proyecto en desarrollo:
+```bash
+npm run dev
+```
+
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador
+
+## Configuración del Formulario de Contacto con EmailJS
+
+El formulario de contacto utiliza **EmailJS**, un servicio que permite enviar emails directamente desde el frontend sin necesidad de backend. Esto es ideal para Vercel y otros servicios de hosting estático.
+
+### ¿Por qué EmailJS?
+
+- ✅ **Sin backend:** Funciona 100% desde el frontend
+- ✅ **Gratis:** 200 emails/mes en plan gratuito
+- ✅ **Fácil de usar:** Configuración en minutos
+- ✅ **Compatible con Vercel:** Sin problemas de serverless functions
+- ✅ **Seguro:** No expone credenciales en el código
+
+### Paso 1: Crear Cuenta en EmailJS
+
+1. Ve a [EmailJS](https://www.emailjs.com/)
+2. Haz clic en **"Sign Up"** (Registrarse)
+3. Completa el registro con tu email
+4. Verifica tu email
+
+### Paso 2: Agregar Servicio de Email
+
+1. Una vez dentro de tu dashboard, ve a **"Email Services"** en el menú lateral
+2. Haz clic en **"Add New Service"**
+3. Selecciona tu proveedor de email preferido:
+   - **Gmail** (recomendado para cuentas personales)
+   - **Outlook**
+   - **Yahoo**
+   - Otros...
+4. Sigue las instrucciones para conectar tu cuenta:
+   - Para Gmail: Autoriza el acceso a tu cuenta
+   - Puede requerir una contraseña de aplicación si tienes 2FA activado
+5. Dale un nombre a tu servicio (ej: "Snow Contact Form")
+6. Guarda el **Service ID** que aparece (lo necesitarás después)
+7. Haz clic en **"Create Service"**
+
+### Paso 3: Crear Template de Email
+
+1. Ve a **"Email Templates"** en el menú lateral
+2. Haz clic en **"Create New Template"**
+3. Configura el template con estos campos:
+
+#### Contenido del Template:
+
+**Subject (Asunto):**
+```
+Nuevo mensaje de contacto - {{from_name}}
+```
+
+**Content (Contenido):**
+```
+Has recibido un nuevo mensaje desde el formulario de contacto de Snow.
+
+Nombre: {{from_name}}
+Email: {{from_email}}
+
+Mensaje:
+{{message}}
+
+---
+Este mensaje fue enviado desde el formulario de contacto de www.tudominio.com
+```
+
+#### Variables del Template:
+- `{{from_name}}` - Nombre del remitente
+- `{{from_email}}` - Email del remitente
+- `{{message}}` - Mensaje
+- `{{to_name}}` - Nombre del destinatario (Snow)
+
+4. En **"Settings"** del template:
+   - **To Email:** Tu email donde quieres recibir los mensajes
+   - **From Name:** `{{from_name}}`
+   - **From Email:** `{{from_email}}`
+   - **Reply To:** `{{from_email}}` (importante para poder responder)
+
+5. Guarda el template y copia el **Template ID**
+
+### Paso 4: Obtener Public Key
+
+1. Ve a **"Account"** en el menú lateral
+2. Busca la sección **"General"**
+3. Encontrarás tu **Public Key** (también llamado User ID)
+4. Cópiala
+
+### Paso 5: Configurar Variables de Entorno
+
+1. Crea un archivo `.env.local` en la raíz del proyecto:
+```bash
+cp .env.example .env.local
+```
+
+2. Edita `.env.local` con tus credenciales de EmailJS:
+
+```env
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=tu_service_id_aqui
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=tu_template_id_aqui
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=tu_public_key_aqui
+```
+
+**Ejemplo:**
+```env
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_abc123
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_xyz789
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=Ky8pQrStUvWxYz
+```
+
+### Paso 6: Probar el Formulario
+
+1. Ejecuta el proyecto:
+```bash
+npm run dev
+```
+
+2. Ve a [http://localhost:3000](http://localhost:3000)
+3. Navega a la sección **"Contacto"**
+4. Llena el formulario con datos de prueba:
+   - Nombre: Tu nombre
+   - Email: Tu email
+   - Descripción: Mensaje de prueba
+5. Haz clic en **"Enviar"**
+6. Deberías ver un mensaje de éxito
+7. Revisa tu email (el configurado en EmailJS) - deberías recibir el mensaje
+
+### Paso 7: Configurar para Producción (Vercel)
+
+Cuando despliegues en Vercel:
+
+1. Ve a tu proyecto en [Vercel Dashboard](https://vercel.com/dashboard)
+2. Selecciona tu proyecto
+3. Ve a **"Settings"** → **"Environment Variables"**
+4. Agrega las tres variables:
+   - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+   - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+   - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+5. Guarda y haz redeploy del proyecto
+
+## Estructura del Proyecto
+
+```
+snow/
+├── src/
+│   ├── app/
+│   │   ├── servicios/
+│   │   │   └── page.tsx              # Página de servicios detallados
+│   │   ├── globals.scss              # Estilos globales
+│   │   ├── layout.tsx                # Layout principal
+│   │   └── page.tsx                  # Página principal
+│   └── components/
+│       ├── about/                    # Componente "Sobre nosotros"
+│       ├── contact/                  # Componente formulario de contacto
+│       ├── header/                   # Componente header/navegación
+│       └── services/                 # Componente servicios home
+├── public/
+│   └── assets/                       # Imágenes y recursos estáticos
+└── .env.example                      # Ejemplo de variables de entorno
+```
+
+## Scripts Disponibles
+
+- `npm run dev` - Ejecuta el proyecto en modo desarrollo
+- `npm run build` - Crea el build de producción
+- `npm start` - Ejecuta el build de producción
+- `npm run lint` - Ejecuta el linter
+
+## Troubleshooting
+
+### El formulario no envía emails
+
+1. **Verifica las variables de entorno:**
+   - Asegúrate de que estén correctamente configuradas en `.env.local`
+   - Los nombres deben comenzar con `NEXT_PUBLIC_`
+   - No debe haber espacios extra
+
+2. **Verifica la configuración de EmailJS:**
+   - Service ID es correcto
+   - Template ID es correcto
+   - Public Key es correcta
+   - El servicio de email está conectado y activo
+
+3. **Revisa la consola del navegador:**
+   - Abre DevTools (F12)
+   - Ve a la pestaña "Console"
+   - Busca errores en rojo
+   - EmailJS mostrará mensajes descriptivos
+
+### Error: "Configuración de email incompleta"
+
+- Verifica que las tres variables estén en `.env.local`
+- Reinicia el servidor de desarrollo después de agregar las variables
+- En producción, verifica las variables en el dashboard de Vercel
+
+### Error: "Service ID inválido"
+
+- Verifica que copiaste el Service ID correctamente desde EmailJS
+- No confundas el Service ID con el Template ID
+
+### Los emails no llegan
+
+1. **Revisa la carpeta de spam** de tu email
+2. **Verifica la configuración del template en EmailJS:**
+   - El "To Email" debe ser tu email
+   - El "Reply To" debe ser `{{from_email}}`
+3. **Chequea el límite de emails:**
+   - Plan gratuito: 200 emails/mes
+   - Ve al dashboard de EmailJS para ver tu uso
+4. **Verifica que el servicio esté activo:**
+   - Ve a "Email Services" en EmailJS
+   - Asegúrate de que tu servicio esté "Active"
+
+### Error en producción (Vercel)
+
+1. Verifica que las variables de entorno estén configuradas en Vercel
+2. Haz un redeploy después de agregar las variables
+3. Revisa los logs de Vercel para errores específicos
+
+## Límites del Plan Gratuito de EmailJS
+
+- ✅ 200 emails por mes
+- ✅ 2 servicios de email
+- ✅ 1 miembro del equipo
+- ✅ Soporte por email
+
+Si necesitas más, puedes actualizar a un plan pago.
+
+## Características del Diseño
+
+### Estilos Modernos
+- Gradientes sutiles en fondos
+- Efectos glassmorphism con backdrop-filter
+- Animaciones smooth en hover y transiciones
+- Scrollbar personalizada
+
+### Componentes
+
+#### Header
+- Sticky header con blur effect
+- Links con underline animado
+- Menú hamburguesa responsive
+- Logo con efecto hover
+
+#### Servicios
+- Cards con glassmorphism
+- Icons con rotación al hover
+- Botón "Ver más" animado
+- Imagen destacada
+
+#### Sobre Nosotros
+- Card central con efecto elevación
+- Elementos decorativos sutiles
+- Tipografía optimizada
+
+#### Contacto
+- Formulario con validación en tiempo real
+- Inputs con efectos focus glow
+- Estados de loading, success y error
+- Mensajes de feedback visual
+- Envío directo desde el frontend con EmailJS
+
+## Paleta de Colores
+
+```scss
+--primary: #08152e;      // Azul oscuro principal
+--secondary: #22345f;    // Azul medio
+--detail: #bda6c6;       // Morado/lila (acento)
+--detail-two: #f5f5f7;   // Gris claro
+```
+
+## Responsive Breakpoints
+
+- Desktop: > 1024px
+- Tablet: 768px - 1024px
+- Mobile: 480px - 768px
+- Mobile pequeño: < 480px
+
+## Licencia
+
+Todos los derechos reservados - Snow
+
+## Soporte
+
+Para consultas sobre servicios, utiliza el formulario de contacto en el sitio web.
+
+## Enlaces Útiles
+
+- [EmailJS Dashboard](https://dashboard.emailjs.com/)
+- [EmailJS Documentation](https://www.emailjs.com/docs/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Vercel Documentation](https://vercel.com/docs)

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import styles from './header.module.scss';
@@ -16,23 +17,33 @@ const Header = () => {
   return (
     <div className={styles.container}>
       <Link href="/">
-        <img
+        <Image
           src="/assets/images/snow/snow_isologo_sin_rubro_version_positivo_svg.svg"
           className={styles.isologo}
+          alt="Snow Logo"
+          width={120}
+          height={36}
+          priority
         />
       </Link>
       <div className={styles.burgerMenu}>
         {showLinks ? (
-          <img
+          <Image
             onClick={burgerClick}
             src="/assets/images/close.svg"
             className={styles.burger}
+            alt="Close menu"
+            width={24}
+            height={24}
           />
         ) : (
-          <img
+          <Image
             onClick={burgerClick}
             src="/assets/images/burger.svg"
             className={styles.burger}
+            alt="Open menu"
+            width={24}
+            height={24}
           />
         )}
       </div>
@@ -46,10 +57,13 @@ const Header = () => {
           `${styles.showLinks}` + ' ' + `${showLinks ? styles.show : ''}`
         }
       >
-        <img
+        <Image
           onClick={burgerClick}
           src="/assets/images/close.svg"
           className={styles.close}
+          alt="Close menu"
+          width={24}
+          height={24}
         />
         <a href="#services">Servicios</a>
         <a href="#about">Sobre nosotros</a>
