@@ -48,15 +48,17 @@ const Services = () => {
           <Link className={styles.linkItem} href="/servicios">Ver servicios completos →</Link>
         </div>
       </div>
-      <Image
-        className={styles.chip}
-        src="/assets/images/chip.jpg"
-        alt="Circuit board"
-        width={800}
-        height={600}
-        quality={85}
-        priority
-      />
+      <div className={styles.chipWrapper}>
+        <Image
+          className={styles.chip}
+          src="/assets/images/IRL/IMG-20241001-WA0025.jpg"
+          alt="Snow team"
+          fill
+          quality={75}
+          priority
+          sizes="50vw"
+        />
+      </div>
     </div>
   );
 };
