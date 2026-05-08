@@ -1,26 +1,32 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 
 import styles from './header.module.scss';
 
 const Header = () => {
-  const path = usePathname();
   const [showLinks, setShowLinks] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const burgerClick = () => {
     setShowLinks((v) => !v);
   };
 
   return (
-    <div className={styles.container}>
-      <Link href="/">
+    <header className={`${styles.container} ${scrolled ? styles.scrolled : ''}`}>
+      <Link href="/" aria-label="Snow — Inicio">
         <Image
-          src="/assets/images/snow/snow_isologo_sin_rubro_version_positivo_svg.svg"
+          src="/assets/images/snow/snow_isologo_sin_rubro_version_negativo_svg.svg"
           className={styles.isologo}
-          alt="Snow Logo"
+          alt="Snow"
           width={120}
           height={36}
           priority
@@ -65,11 +71,11 @@ const Header = () => {
           width={24}
           height={24}
         />
-        <a href="#services">Servicios</a>
-        <a href="#about">Sobre nosotros</a>
-        <a href="#contact">Contacto</a>
+        <Link href="/servicios" onClick={burgerClick}>Servicios</Link>
+        <Link href="/#about" onClick={burgerClick}>Sobre nosotros</Link>
+        <Link href="/#contact" onClick={burgerClick}>Contacto</Link>
       </div>
-    </div>
+    </header>
   );
 };
 
