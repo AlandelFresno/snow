@@ -1,5 +1,12 @@
+import { Sofia_Sans } from 'next/font/google';
 import Header from '@/components/header/header';
 import './globals.scss';
+
+const sofia = Sofia_Sans({
+  subsets: ['latin'],
+  variable: '--font-sofia',
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -7,15 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="es-AR" className={sofia.variable}>
       <body>
         <Header />
         {children}
