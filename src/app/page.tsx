@@ -4,8 +4,10 @@ import Contact from '../components/contact/contact';
 import Services from '../components/services/services';
 
 export const metadata: Metadata = {
-  title: 'Snow',
-  description: 'Servicios a tu disposición',
+  title: 'Inicio',
+  description:
+    'Snow — servicios técnicos en aires acondicionados, grupos generadores y centrales telefónicas. 30+ años de experiencia en Argentina.',
+  alternates: { canonical: '/' },
 };
 
 export default function Home() {
