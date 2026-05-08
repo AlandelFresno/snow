@@ -10,10 +10,11 @@ export const metadata: Metadata = {
 
 // TODO papá: confirmar mapeo foto → servicio. Por ahora asignacion tentativa.
 const HERO_PHOTO = '/assets/images/IRL/IMG-20241001-WA0015.jpg';
+// TODO papá: confirmar mapeo. WA0024/WA0036 tentativos para generadores/telecom (Grupos_Generadores y Centrales_Telefonicas movidos a home).
 const SECTION_PHOTOS = {
   aires: '/assets/images/IRL/IMG-20241001-WA0017.jpg',
-  generadores: '/assets/images/IRL/IMG-20241001-WA0025.jpg',
-  telecom: '/assets/images/IRL/IMG-20241001-WA0035.jpg',
+  generadores: '/assets/images/IRL/IMG-20241001-WA0024.jpg',
+  telecom: '/assets/images/IRL/IMG-20241001-WA0036.jpg',
 };
 
 // Galeria solo fotos IRL reales. demo1/demo2 son ilustraciones de referencia, NO van aqui.
@@ -21,8 +22,7 @@ const SECTION_PHOTOS = {
 const GALLERY_PHOTOS = [
   'WA0016', 'WA0018', 'WA0019', 'WA0020', 'WA0021', 'WA0022', 'WA0023',
   'WA0024', 'WA0026', 'WA0027', 'WA0028', 'WA0030', 'WA0032', 'WA0033',
-  'WA0034', 'WA0036', 'WA0037', 'WA0038', 'WA0039', 'WA0040', 'WA0041',
-  'WA0042', 'WA0043',
+  'WA0036', 'WA0037', 'WA0038', 'WA0039', 'WA0040', 'WA0041', 'WA0042',
 ].map((id) => `/assets/images/IRL/IMG-20241001-${id}.jpg`);
 
 type ServiceBlock = {
@@ -178,13 +178,13 @@ const Services = () => {
             </div>
             <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <strong>3</strong>
-              <span>especialidades técnicas</span>
+              <strong>02</strong>
+              <span>socios ingenieros</span>
             </div>
             <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <strong>24/7</strong>
-              <span>respuesta en emergencias</span>
+              <strong>03</strong>
+              <span>especialidades técnicas</span>
             </div>
           </div>
           <nav className={styles.heroNav} aria-label="Servicios">
@@ -263,7 +263,21 @@ const Services = () => {
                 />
               </figure>
             ))}
+            <div className={styles.galleryStatCard} aria-hidden="true">
+              <strong>30+</strong>
+              <span>años en campo</span>
+              <span className={styles.galleryStatMeta}>Snow · archivo activo</span>
+            </div>
           </div>
+          <footer className={styles.galleryFooter}>
+            <span className={styles.galleryFooterLeft}>
+              {GALLERY_PHOTOS.length} registros · Argentina
+            </span>
+            <span className={styles.galleryFooterRule} aria-hidden="true" />
+            <span className={styles.galleryFooterRight}>
+              Documentamos cada intervención
+            </span>
+          </footer>
         </section>
 
         {/* CTA cierre */}
