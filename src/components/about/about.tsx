@@ -1,37 +1,62 @@
-import React from 'react';
+import Image from 'next/image';
 import styles from './about.module.scss';
+
+const STATS = [
+  { value: '30+', label: 'Años de experiencia' },
+  { value: '02', label: 'Socios ingenieros' },
+  { value: '03', label: 'Especializaciones' },
+];
 
 const About = () => {
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>Sobre nosotros</h3>
+    <section className={styles.section} aria-labelledby="about-heading">
+      <span id="about" className={styles.anchor} />
 
-      <div className={styles.contentWrapper}>
-        <div className={styles.statsRow}>
-          <div className={styles.statCard}>
-            <span className={styles.statNumber}>30+</span>
-            <span className={styles.statLabel}>Años de experiencia</span>
+      <div className={styles.inner}>
+        <div className={styles.media}>
+          <div className={styles.mediaFrame}>
+            <Image
+              src="/assets/images/IRL/IMG-20241001-WA0021.jpg"
+              alt="Equipo Snow trabajando en campo"
+              fill
+              sizes="(max-width: 900px) 100vw, 45vw"
+              className={styles.mediaImg}
+            />
           </div>
-          <div className={styles.statCard}>
-            <span className={styles.statNumber}>2</span>
-            <span className={styles.statLabel}>Socios ingenieros</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statNumber}>3</span>
-            <span className={styles.statLabel}>Especializaciones</span>
+          <div className={styles.mediaTag}>
+            <span className={styles.mediaTagDot} aria-hidden="true" />
+            En campo · Argentina
           </div>
         </div>
 
-        <p className={styles.body}>
-          Somos dos socios con más de 30 años de experiencia en la industria,
-          ingenieros recibidos y especializados en nuestros servicios. Nuestros
-          conocimientos te aseguran un trabajo excelente. No dudes en
-          contactarnos!
-        </p>
+        <div className={styles.content}>
+          <span className={styles.eyebrow}>Sobre Snow</span>
+          <h2 id="about-heading" className={styles.title}>
+            Dos ingenieros. <br />
+            <em>Un oficio que no se enseña.</em>
+          </h2>
+          <p className={styles.body}>
+            Empezamos en los noventa, cuando los manuales eran en inglés y los
+            repuestos llegaban por barco. Hoy seguimos haciendo lo mismo:
+            entender qué falla, repararlo bien, y dejarlo funcionando.
+          </p>
+          <p className={styles.body}>
+            Dos ingenieros recibidos, especializados en lo que ofrecen.
+            Trabajos pensados, no improvisados.
+          </p>
+
+          <div className={styles.statsRow}>
+            {STATS.map((s) => (
+              <div key={s.label} className={styles.stat}>
+                <span className={styles.statValue}>{s.value}</span>
+                <span className={styles.statLabel}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <p id="contact"></p>
-    </div>
+    </section>
   );
 };
 
